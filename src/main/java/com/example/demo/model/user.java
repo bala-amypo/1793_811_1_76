@@ -63,6 +63,7 @@ public class User {
     public void setEmail(String email){
         this.email = email;
     }
-    public void setpassword(String password){
-        this.password = password;  
+    public string getPassword(){
+        return password;
     }
+    public void setpassword
