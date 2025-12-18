@@ -8,6 +8,11 @@ import java.util.HashSet;
 @Table(
     neme = "users",
     uniqueConstraints = {
-        @uniqueConstraints(columnName = "username")
+        @uniqueConstraint(columnName = "userName"),
+        @uniqueConstrint(columnName = "email")
     }
 )
+public class User {
+    @Id
+    @GeneratedValue(strategy)
+}
