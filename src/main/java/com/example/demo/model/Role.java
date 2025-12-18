@@ -26,6 +26,11 @@ public class role {
     public void setId(Long id){
         this.id = id;
     }
-    public String getname(){
-        return name; }
+    public String getName(){
+        return name;
+    }
+    public viod setName(String name){
+        this.name = name;
+    }
+    
 }
