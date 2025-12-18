@@ -13,7 +13,7 @@ import java.util.HashSet;
     }
 )
 public class User {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -60,8 +60,8 @@ public class User {
     public string getEmail(){
         return email;
     }
-    public void setEmail(String Password){
-        this.passwordb = password;
+    public void setEmail(String email){
+        this.email = email;
     }
     public set<Role>getRoles(){
         return roles;
