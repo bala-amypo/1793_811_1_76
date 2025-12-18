@@ -46,4 +46,12 @@ public class User {
     public Long getId(){
         return id;
     }
+
+    public viod setId (long id){
+        this.id = id;
+    }
+    public String getUsername(){
+        return username;
+    } 
+    public viod setUsername(string username)
 }
