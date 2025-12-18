@@ -13,6 +13,7 @@ import java.util.HashSet;
     }
 )
 public class User {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -65,3 +66,7 @@ public class User {
     public set<Role>getRoles(){
         return roles;
     }
+    public void setRoles(set<Role> Roles){
+        this.roles = roles;
+    }
+}
