@@ -20,5 +20,12 @@ public class User {
     @Column(nullable = false)
     private String username;
 
-    @Colu
+    @Column(nullable = false)
+    private String email;
+
+    @Column (nullable = false)
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @J
 }
