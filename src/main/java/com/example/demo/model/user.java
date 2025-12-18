@@ -14,5 +14,11 @@ import java.util.HashSet;
 )
 public class User {
     @Id
-    @GeneratedValue(strategy)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String username;
+
+    @Colu
 }
