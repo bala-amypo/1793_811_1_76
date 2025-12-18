@@ -53,5 +53,15 @@ public class User {
     public String getUsername(){
         return username;
     } 
-    public viod setUsername(string username)
-}
+    public viod setUsername(string username){
+        this.username = username;
+    }
+    public string getEmail(){
+        return email;
+    }
+    public void setEmail(String Password){
+        this.passwordb = password;
+    }
+    public set<Role>getRoles(){
+        return roles;
+    }
