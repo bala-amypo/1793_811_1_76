@@ -8,5 +8,12 @@ public class role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  Long id;
+
+    @column(nullable = false,unique = true)
+    private String name;
+    
+    public Role(){
+    }
     
 }
