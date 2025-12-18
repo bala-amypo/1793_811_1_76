@@ -40,6 +40,10 @@ public class User {
     public user(String user name, String email,String passwor){
         this.username = username;
         this.email = email
-        this.password
+        this.password = password;
+    }
+
+    public Long getId(){
+        return id;
     }
 }
