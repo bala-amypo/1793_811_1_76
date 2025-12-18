@@ -66,4 +66,13 @@ public class User {
     public string getPassword(){
         return password;
     }
-    public void setpassword
+    public void setpassword(string password){
+        this.password = password;
+    }
+    public set<Role>getRoles(){
+        return roles;
+    }
+    public void setRoles(set<Role> Roles){
+        this.roles = roles;
+    }
+}
