@@ -63,10 +63,6 @@ public class User {
     public void setEmail(String email){
         this.email = email;
     }
-    public set<Role>getRoles(){
-        return roles;
+    public void setpassword(String password){
+        this.password = password;  
     }
-    public void setRoles(set<Role> Roles){
-        this.roles = roles;
-    }
-}
