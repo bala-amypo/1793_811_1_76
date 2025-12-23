@@ -9,35 +9,32 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RelationshipDeclarationServiceImpl implements RelationshipDeclarationService {
+public class RelationshipDeclarationServiceImpl
+        implements RelationshipDeclarationService {
 
     @Autowired
-    private RelationshipDeclarationRepository declarationRepository;
+    private RelationshipDeclarationRepository repository;
 
     @Override
-    public RelationshipDeclaration declareRelationship(RelationshipDeclaration declaration) {
-        // isVerified defaults to false if null
-        if (declaration.getIsVerified() == null) {
-            declaration.setIsVerified(false);
-        }
-        return declarationRepository.save(declaration);
+    public RelationshipDeclaration declare(RelationshipDeclaration d) {
+        d.setStatus("PENDING");
+        return repository.save(d);
     }
 
     @Override
-    public List<RelationshipDeclaration> getDeclarationsByPerson(Long personId) {
-        return declarationRepository.findByPersonId(personId);
+    public List<RelationshipDeclaration> getByPerson(Long personId) {
+        return repository.findByPersonId(personId);
     }
 
     @Override
-    public RelationshipDeclaration verifyDeclaration(Long declarationId, boolean verified) {
-        RelationshipDeclaration declaration = declarationRepository.findById(declarationId)
-                .orElseThrow(() -> new RuntimeException("Declaration not found with id: " + declarationId));
-        declaration.setIsVerified(verified);
-        return declarationRepository.save(declaration);
+    public RelationshipDeclaration verify(Long id, String status) {
+        RelationshipDeclaration d = repository.findById(id).orElseThrow();
+        d.setStatus(status);
+        return repository.save(d);
     }
 
     @Override
-    public List<RelationshipDeclaration> getAllDeclarations() {
-        return declarationRepository.findAll();
+    public List<RelationshipDeclaration> getAll() {
+        return repository.findAll();
     }
 }

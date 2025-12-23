@@ -1,14 +1,13 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.VendorEngagementRecord;
+import com.example.demo.model.VendorEngagement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface VendorEngagementRepository extends JpaRepository<VendorEngagementRecord, Long> {
+public interface VendorEngagementRepository
+        extends JpaRepository<VendorEngagement, Long> {
 
-    List<VendorEngagementRecord> findByEmployeeId(Long employeeId);
-
-    List<VendorEngagementRecord> findByVendorId(Long vendorId);
-
+    List<VendorEngagement> findByEmployeeId(Long employeeId);
+    List<VendorEngagement> findByVendorId(Long vendorId);
 }

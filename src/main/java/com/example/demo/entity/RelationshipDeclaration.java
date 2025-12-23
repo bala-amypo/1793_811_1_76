@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class RelationshipDeclaration {
@@ -11,72 +10,18 @@ public class RelationshipDeclaration {
     private Long id;
 
     private Long personId;
+    private String relation;
+    private String status;
 
-    private String relatedPersonName;
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    private String relationshipType;
+    public Long getPersonId() { return personId; }
+    public void setPersonId(Long personId) { this.personId = personId; }
 
-    private String description;
+    public String getRelation() { return relation; }
+    public void setRelation(String relation) { this.relation = relation; }
 
-    private LocalDateTime declaredAt;
-
-    private Boolean isVerified = false;
-
-    public RelationshipDeclaration() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getPersonId() {
-        return personId;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setPersonId(Long personId) {
-        this.personId = personId;
-    }
-
-    public String getRelatedPersonName() {
-        return relatedPersonName;
-    }
-
-    public void setRelatedPersonName(String relatedPersonName) {
-        this.relatedPersonName = relatedPersonName;
-    }
-
-    public String getRelationshipType() {
-        return relationshipType;
-    }
-
-    public void setRelationshipType(String relationshipType) {
-        this.relationshipType = relationshipType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDateTime getDeclaredAt() {
-        return declaredAt;
-    }
-
-    public void setDeclaredAt(LocalDateTime declaredAt) {
-        this.declaredAt = declaredAt;
-    }
-
-    public Boolean getIsVerified() {
-        return isVerified;
-    }
-
-    public void setIsVerified(Boolean verified) {
-        isVerified = verified;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

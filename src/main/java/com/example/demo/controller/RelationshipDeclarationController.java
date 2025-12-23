@@ -4,46 +4,36 @@ import com.example.demo.model.RelationshipDeclaration;
 import com.example.demo.service.RelationshipDeclarationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "RelationshipDeclaration", description = "Manage relationship declarations")
 @RestController
 @RequestMapping("/api/relationships")
+@Tag(name = "Relationship Declaration")
 public class RelationshipDeclarationController {
 
     @Autowired
-    private RelationshipDeclarationService relationshipDeclarationService;
+    private RelationshipDeclarationService service;
 
-    // POST /api/relationships - declare a relationship
     @PostMapping
-    public ResponseEntity<RelationshipDeclaration> declareRelationship(@RequestBody RelationshipDeclaration declaration) {
-        RelationshipDeclaration created = relationshipDeclarationService.declareRelationship(declaration);
-        return ResponseEntity.ok(created);
+    public RelationshipDeclaration declare(@RequestBody RelationshipDeclaration d) {
+        return service.declare(d);
     }
 
-    // GET /api/relationships/person/{personId} - get declarations for a person
     @GetMapping("/person/{personId}")
-    public ResponseEntity<List<RelationshipDeclaration>> getDeclarationsByPersonId(@PathVariable Long personId) {
-        List<RelationshipDeclaration> declarations = relationshipDeclarationService.getDeclarationsByPersonId(personId);
-        return ResponseEntity.ok(declarations);
+    public List<RelationshipDeclaration> getByPerson(@PathVariable Long personId) {
+        return service.getByPerson(personId);
     }
 
-    // PUT /api/relationships/{id}/verify - verify or reject declaration (pass boolean in request param)
     @PutMapping("/{id}/verify")
-    public ResponseEntity<RelationshipDeclaration> verifyDeclaration(
-            @PathVariable Long id,
-            @RequestParam Boolean isVerified) {
-        RelationshipDeclaration updated = relationshipDeclarationService.verifyDeclaration(id, isVerified);
-        return ResponseEntity.ok(updated);
+    public RelationshipDeclaration verify(@PathVariable Long id,
+                                          @RequestParam String status) {
+        return service.verify(id, status);
     }
 
-    // GET /api/relationships - list all relationship declarations
     @GetMapping
-    public ResponseEntity<List<RelationshipDeclaration>> getAllDeclarations() {
-        List<RelationshipDeclaration> all = relationshipDeclarationService.getAllDeclarations();
-        return ResponseEntity.ok(all);
+    public List<RelationshipDeclaration> getAll() {
+        return service.getAll();
     }
 }
