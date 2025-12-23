@@ -3,7 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-public class VendorEngagementRecord {
+public class VendorEngagement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
