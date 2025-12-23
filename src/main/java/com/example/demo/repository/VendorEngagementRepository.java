@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface VendorEngagementRecordRepository extends JpaRepository<VendorEngagementRecord, Long> {
+public interface VendorEngagementRepository extends JpaRepository<VendorEngagementRecord, Long> {
 
     List<VendorEngagementRecord> findByEmployeeId(Long employeeId);
 
