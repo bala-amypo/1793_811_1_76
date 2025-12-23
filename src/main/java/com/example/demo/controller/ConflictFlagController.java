@@ -4,44 +4,35 @@ import com.example.demo.model.ConflictFlag;
 import com.example.demo.service.ConflictFlagService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "ConflictFlag", description = "Manage conflict flags")
 @RestController
 @RequestMapping("/api/conflict-flags")
+@Tag(name = "Conflict Flag")
 public class ConflictFlagController {
 
     @Autowired
-    private ConflictFlagService conflictFlagService;
+    private ConflictFlagService service;
 
-    // POST /api/conflict-flags - add conflict flag
     @PostMapping
-    public ResponseEntity<ConflictFlag> addConflictFlag(@RequestBody ConflictFlag conflictFlag) {
-        ConflictFlag created = conflictFlagService.addConflictFlag(conflictFlag);
-        return ResponseEntity.ok(created);
+    public ConflictFlag create(@RequestBody ConflictFlag flag) {
+        return service.create(flag);
     }
 
-    // GET /api/conflict-flags/case/{caseId} - get all flags for a conflict case
     @GetMapping("/case/{caseId}")
-    public ResponseEntity<List<ConflictFlag>> getFlagsByCase(@PathVariable Long caseId) {
-        List<ConflictFlag> flags = conflictFlagService.getFlagsByCaseId(caseId);
-        return ResponseEntity.ok(flags);
+    public List<ConflictFlag> getByCase(@PathVariable Long caseId) {
+        return service.getByCase(caseId);
     }
 
-    // GET /api/conflict-flags/{id} - get conflict flag by ID
     @GetMapping("/{id}")
-    public ResponseEntity<ConflictFlag> getFlagById(@PathVariable Long id) {
-        ConflictFlag flag = conflictFlagService.getFlagById(id);
-        return ResponseEntity.ok(flag);
+    public ConflictFlag getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
-    // GET /api/conflict-flags - list all conflict flags
     @GetMapping
-    public ResponseEntity<List<ConflictFlag>> getAllFlags() {
-        List<ConflictFlag> all = conflictFlagService.getAllFlags();
-        return ResponseEntity.ok(all);
+    public List<ConflictFlag> getAll() {
+        return service.getAll();
     }
 }

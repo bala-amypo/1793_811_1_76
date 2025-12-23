@@ -12,26 +12,25 @@ import java.util.List;
 public class ConflictFlagServiceImpl implements ConflictFlagService {
 
     @Autowired
-    private ConflictFlagRepository flagRepository;
+    private ConflictFlagRepository repository;
 
     @Override
-    public ConflictFlag addFlag(ConflictFlag flag) {
-        return flagRepository.save(flag);
+    public ConflictFlag create(ConflictFlag flag) {
+        return repository.save(flag);
     }
 
     @Override
-    public List<ConflictFlag> getFlagsByCase(Long caseId) {
-        return flagRepository.findByCaseId(caseId);
+    public List<ConflictFlag> getByCase(Long caseId) {
+        return repository.findByCaseId(caseId);
     }
 
     @Override
-    public ConflictFlag getFlagById(Long id) {
-        return flagRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Conflict flag not found with id: " + id));
+    public ConflictFlag getById(Long id) {
+        return repository.findById(id).orElseThrow();
     }
 
     @Override
-    public List<ConflictFlag> getAllFlags() {
-        return flagRepository.findAll();
+    public List<ConflictFlag> getAll() {
+        return repository.findAll();
     }
 }
