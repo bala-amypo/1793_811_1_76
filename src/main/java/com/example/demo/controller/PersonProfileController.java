@@ -4,53 +4,41 @@ import com.example.demo.model.PersonProfile;
 import com.example.demo.service.PersonProfileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "PersonProfile", description = "Manage person profiles")
 @RestController
 @RequestMapping("/api/persons")
+@Tag(name = "Person Profile")
 public class PersonProfileController {
 
     @Autowired
-    private PersonProfileService personProfileService;
+    private PersonProfileService service;
 
-    // POST /api/persons - create new person profile
     @PostMapping
-    public ResponseEntity<PersonProfile> createPersonProfile(@RequestBody PersonProfile personProfile) {
-        PersonProfile created = personProfileService.createPersonProfile(personProfile);
-        return ResponseEntity.ok(created);
+    public PersonProfile create(@RequestBody PersonProfile person) {
+        return service.create(person);
     }
 
-    // GET /api/persons/{id} - get person by ID
     @GetMapping("/{id}")
-    public ResponseEntity<PersonProfile> getPersonById(@PathVariable Long id) {
-        PersonProfile person = personProfileService.getPersonById(id);
-        return ResponseEntity.ok(person);
+    public PersonProfile getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
-    // GET /api/persons - list all persons
     @GetMapping
-    public ResponseEntity<List<PersonProfile>> getAllPersons() {
-        List<PersonProfile> persons = personProfileService.getAllPersons();
-        return ResponseEntity.ok(persons);
+    public List<PersonProfile> getAll() {
+        return service.getAll();
     }
 
-    // PUT /api/persons/{id}/relationship-declared - update relationshipDeclared flag
     @PutMapping("/{id}/relationship-declared")
-    public ResponseEntity<PersonProfile> updateRelationshipDeclared(
-            @PathVariable Long id,
-            @RequestParam Boolean relationshipDeclared) {
-        PersonProfile updated = personProfileService.updateRelationshipDeclared(id, relationshipDeclared);
-        return ResponseEntity.ok(updated);
+    public PersonProfile updateDeclared(@PathVariable Long id,
+                                        @RequestParam boolean declared) {
+        return service.updateRelationshipDeclared(id, declared);
     }
 
-    // GET /api/persons/lookup/{referenceId} - get person by referenceId
     @GetMapping("/lookup/{referenceId}")
-    public ResponseEntity<PersonProfile> getPersonByReferenceId(@PathVariable String referenceId) {
-        PersonProfile person = personProfileService.getPersonByReferenceId(referenceId);
-        return ResponseEntity.ok(person);
+    public PersonProfile getByReference(@PathVariable String referenceId) {
+        return service.getByReferenceId(referenceId);
     }
 }
