@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.VendorEngagementRecord;
+import com.example.demo.model.VendorEngagement;
 import com.example.demo.repository.VendorEngagementRepository;
 import com.example.demo.service.VendorEngagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +12,25 @@ import java.util.List;
 public class VendorEngagementServiceImpl implements VendorEngagementService {
 
     @Autowired
-    private VendorEngagementRepository engagementRepository;
+    private VendorEngagementRepository repository;
 
     @Override
-    public VendorEngagementRecord addEngagement(VendorEngagementRecord record) {
-        return engagementRepository.save(record);
+    public VendorEngagement create(VendorEngagement engagement) {
+        return repository.save(engagement);
     }
 
     @Override
-    public List<VendorEngagementRecord> getEngagementsByEmployee(Long employeeId) {
-        return engagementRepository.findByEmployeeId(employeeId);
+    public List<VendorEngagement> getByEmployee(Long employeeId) {
+        return repository.findByEmployeeId(employeeId);
     }
 
     @Override
-    public List<VendorEngagementRecord> getEngagementsByVendor(Long vendorId) {
-        return engagementRepository.findByVendorId(vendorId);
+    public List<VendorEngagement> getByVendor(Long vendorId) {
+        return repository.findByVendorId(vendorId);
     }
 
     @Override
-    public List<VendorEngagementRecord> getAllEngagements() {
-        return engagementRepository.findAll();
+    public List<VendorEngagement> getAll() {
+        return repository.findAll();
     }
 }

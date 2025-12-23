@@ -12,38 +12,33 @@ import java.util.List;
 public class ConflictCaseServiceImpl implements ConflictCaseService {
 
     @Autowired
-    private ConflictCaseRepository caseRepository;
+    private ConflictCaseRepository repository;
 
     @Override
-    public ConflictCase createCase(ConflictCase conflictCase) {
-        // Set default status OPEN if null
-        if (conflictCase.getStatus() == null) {
-            conflictCase.setStatus("OPEN");
-        }
-        return caseRepository.save(conflictCase);
+    public ConflictCase create(ConflictCase conflictCase) {
+        conflictCase.setStatus("OPEN");
+        return repository.save(conflictCase);
     }
 
     @Override
-    public ConflictCase updateCaseStatus(Long caseId, String status) {
-        ConflictCase conflictCase = caseRepository.findById(caseId)
-                .orElseThrow(() -> new RuntimeException("Conflict case not found with id: " + caseId));
-        conflictCase.setStatus(status);
-        return caseRepository.save(conflictCase);
+    public ConflictCase updateStatus(Long id, String status) {
+        ConflictCase c = repository.findById(id).orElseThrow();
+        c.setStatus(status);
+        return repository.save(c);
     }
 
     @Override
-    public List<ConflictCase> getCasesByPerson(Long personId) {
-        return caseRepository.findByPrimaryPersonIdOrSecondaryPersonId(personId, personId);
+    public List<ConflictCase> getByPerson(Long personId) {
+        return repository.findByPersonId(personId);
     }
 
     @Override
-    public ConflictCase getCaseById(Long id) {
-        return caseRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Conflict case not found with id: " + id));
+    public ConflictCase getById(Long id) {
+        return repository.findById(id).orElseThrow();
     }
 
     @Override
-    public List<ConflictCase> getAllCases() {
-        return caseRepository.findAll();
+    public List<ConflictCase> getAll() {
+        return repository.findAll();
     }
 }
