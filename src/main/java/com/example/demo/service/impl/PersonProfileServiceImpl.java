@@ -10,14 +10,26 @@ import java.util.List;
 @Service
 public class PersonProfileServiceImpl implements PersonProfileService {
 
-    private final PersonProfileRepository repo;
-
     public PersonProfileServiceImpl(PersonProfileRepository repo) {
-        this.repo = repo;
     }
 
-    public PersonProfile createPerson(PersonProfile p) { return p; }
-    public List<PersonProfile> getAllPersons() { return List.of(); }
-    public PersonProfile getPersonById(long id) { return null; }
-    public PersonProfile findByReferenceId(String refId) { return null; }
+    public PersonProfile create(PersonProfile person) {
+        return person;
+    }
+
+    public PersonProfile getById(Long id) {
+        return null;
+    }
+
+    public List<PersonProfile> getAll() {
+        return List.of();
+    }
+
+    public PersonProfile updateRelationshipDeclared(Long id, boolean declared) {
+        return null;
+    }
+
+    public PersonProfile getByReferenceId(String refId) {
+        return null;
+    }
 }
