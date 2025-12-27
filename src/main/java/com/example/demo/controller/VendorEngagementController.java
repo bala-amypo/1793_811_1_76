@@ -2,37 +2,44 @@ package com.example.demo.controller;
 
 import com.example.demo.model.VendorEngagement;
 import com.example.demo.service.VendorEngagementService;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/engagements")
-@Tag(name = "Vendor Engagement")
+@RequestMapping("/vendor-engagements")
 public class VendorEngagementController {
 
-    @Autowired
-    private VendorEngagementService service;
+    private final VendorEngagementService service;
+
+    public VendorEngagementController(VendorEngagementService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public VendorEngagement create(@RequestBody VendorEngagement engagement) {
         return service.create(engagement);
     }
 
-    @GetMapping("/employee/{employeeId}")
-    public List<VendorEngagement> byEmployee(@PathVariable Long employeeId) {
-        return service.getByEmployee(employeeId);
-    }
-
-    @GetMapping("/vendor/{vendorId}")
-    public List<VendorEngagement> byVendor(@PathVariable Long vendorId) {
-        return service.getByVendor(vendorId);
+    @GetMapping("/{id}")
+    public VendorEngagement getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
     @GetMapping
     public List<VendorEngagement> getAll() {
         return service.getAll();
+    }
+
+    @PutMapping("/{id}")
+    public VendorEngagement update(
+            @PathVariable Long id,
+            @RequestBody VendorEngagement engagement) {
+        return service.update(id, engagement);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }
