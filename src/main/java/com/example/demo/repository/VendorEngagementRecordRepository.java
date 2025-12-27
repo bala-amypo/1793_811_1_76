@@ -12,6 +12,10 @@ public class VendorEngagementRecordRepository {
         return record;
     }
 
+    public VendorEngagementRecord findById(Long id) {
+        return null;
+    }
+
     public List<VendorEngagementRecord> findAll() {
         return List.of();
     }
