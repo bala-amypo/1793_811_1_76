@@ -2,30 +2,36 @@ package com.example.demo.service.impl;
 
 import com.example.demo.model.PersonProfile;
 import com.example.demo.service.PersonProfileService;
-import java.util.*;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
 public class PersonProfileServiceImpl implements PersonProfileService {
 
-    private final List<PersonProfile> store = new ArrayList<>();
-
     @Override
-    public PersonProfile createPerson(PersonProfile p) {
-        store.add(p);
-        return p;
+    public PersonProfile create(PersonProfile person) {
+        return person;
     }
 
     @Override
-    public PersonProfile getPersonById(long id) {
-        return store.stream().findFirst().orElse(null);
+    public PersonProfile getById(Long id) {
+        return null;
     }
 
     @Override
-    public List<PersonProfile> getAllPersons() {
-        return store;
+    public List<PersonProfile> getAll() {
+        return new ArrayList<>();
     }
 
     @Override
-    public Optional<PersonProfile> findByReferenceId(String refId) {
-        return store.stream().findFirst();
+    public PersonProfile updateRelationshipDeclared(Long id, boolean declared) {
+        return null;
+    }
+
+    @Override
+    public PersonProfile getByReferenceId(String referenceId) {
+        return null;
     }
 }
