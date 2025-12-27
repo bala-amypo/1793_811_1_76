@@ -1,52 +1,21 @@
 package com.example.demo.model;
 
-public class VendorEngagement {
+public class VendorEngagementRecord {
 
     private Long id;
-    private Long vendorId;
     private Long employeeId;
-    private String engagementType;
-    private String status;
+    private String vendorName;
+    private String role;
 
-    public VendorEngagement() {}
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getEmployeeId() { return employeeId; }
+    public void setEmployeeId(Long employeeId) { this.employeeId = employeeId; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getVendorName() { return vendorName; }
+    public void setVendorName(String vendorName) { this.vendorName = vendorName; }
 
-    public Long getVendorId() {
-        return vendorId;
-    }
-
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
-    }
-
-    public Long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getEngagementType() {
-        return engagementType;
-    }
-
-    public void setEngagementType(String engagementType) {
-        this.engagementType = engagementType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }
