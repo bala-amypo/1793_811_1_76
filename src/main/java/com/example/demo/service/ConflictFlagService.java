@@ -5,7 +5,11 @@ import java.util.List;
 
 public interface ConflictFlagService {
 
-    ConflictFlag addFlag(ConflictFlag flag);
+    ConflictFlag create(ConflictFlag flag);
 
-    List<ConflictFlag> getFlagsByCase(long caseId);
+    List<ConflictFlag> getByCase(Long caseId);
+
+    ConflictFlag getById(Long id);
+
+    List<ConflictFlag> getAll();
 }
