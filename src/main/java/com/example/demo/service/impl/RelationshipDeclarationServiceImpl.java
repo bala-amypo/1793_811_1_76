@@ -1,32 +1,40 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.RelationshipDeclaration;
-import com.example.demo.repository.PersonProfileRepository;
-import com.example.demo.repository.RelationshipDeclarationRepository;
 import com.example.demo.service.RelationshipDeclarationService;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class RelationshipDeclarationServiceImpl
-        implements RelationshipDeclarationService {
+@Service
+public class RelationshipDeclarationServiceImpl implements RelationshipDeclarationService {
 
-    private final RelationshipDeclarationRepository repo;
-    private final PersonProfileRepository personRepo;
+    private final List<RelationshipDeclaration> store = new ArrayList<>();
 
-    public RelationshipDeclarationServiceImpl(
-            RelationshipDeclarationRepository repo,
-            PersonProfileRepository personRepo) {
-        this.repo = repo;
-        this.personRepo = personRepo;
+    @Override
+    public RelationshipDeclaration declare(RelationshipDeclaration declaration) {
+        declaration.setStatus("PENDING");
+        store.add(declaration);
+        return declaration;
     }
 
     @Override
-    public RelationshipDeclaration declareRelationship(RelationshipDeclaration d) {
-        return repo.save(d);
+    public List<RelationshipDeclaration> getByPerson(Long personId) {
+        return store.stream()
+                .filter(d -> d.getPersonId().equals(personId))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<RelationshipDeclaration> getAll() {
-        return repo.findAll();
+    public RelationshipDeclaration verify(Long id, String status) {
+        for (RelationshipDeclaration d : store) {
+            if (d.getId().equals(id)) {
+                d.setStatus(status);
+                return d;
+            }
+        }
+        return null;
     }
 }
