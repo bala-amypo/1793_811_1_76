@@ -5,7 +5,11 @@ import java.util.List;
 
 public interface VendorEngagementService {
 
-    List<VendorEngagementRecord> getEngagementsByEmployee(long empId);
+    VendorEngagementRecord create(VendorEngagementRecord record);
 
-    List<VendorEngagementRecord> getAllEngagements();
+    VendorEngagementRecord getById(Long id);
+
+    List<VendorEngagementRecord> getAll();
+
+    void delete(Long id);
 }
