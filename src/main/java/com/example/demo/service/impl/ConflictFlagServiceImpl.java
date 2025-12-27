@@ -2,16 +2,17 @@ package com.example.demo.service.impl;
 
 import com.example.demo.model.ConflictFlag;
 import com.example.demo.repository.ConflictFlagRepository;
-import com.example.demo.service.ConflictFlagsService;
+import com.example.demo.service.ConflictFlagService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConflictFlagsServiceImpl implements ConflictFlagsService {
+public class ConflictFlagServiceImpl implements ConflictFlagService {
 
-    public ConflictFlagsServiceImpl(ConflictFlagRepository repo) {
+    public ConflictFlagServiceImpl(ConflictFlagRepository repo) {
     }
 
-    public ConflictFlag addFlag(ConflictFlag flag) {
+    @Override
+    public ConflictFlag create(ConflictFlag flag) {
         return flag;
     }
 }
