@@ -1,36 +1,38 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.VendorEngagementRecord;
-import com.example.demo.repository.VendorEngagementRecordRepository;
-import com.example.demo.repository.PersonProfileRepository;
+import com.example.demo.model.VendorEngagement;
 import com.example.demo.service.VendorEngagementService;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class VendorEngagementServiceImpl implements VendorEngagementService {
 
-    private final VendorEngagementRecordRepository repo;
-    private final PersonProfileRepository personRepo;
+    private final List<VendorEngagement> store = new ArrayList<>();
 
-    public VendorEngagementServiceImpl(
-            VendorEngagementRecordRepository repo,
-            PersonProfileRepository personRepo) {
-        this.repo = repo;
-        this.personRepo = personRepo;
+    @Override
+    public VendorEngagement create(VendorEngagement engagement) {
+        store.add(engagement);
+        return engagement;
     }
 
     @Override
-    public VendorEngagementRecord save(VendorEngagementRecord record) {
-        return repo.save(record);
+    public VendorEngagement getById(Long id) {
+        return store.stream()
+                .filter(e -> e.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
-    public List<VendorEngagementRecord> getEngagementsByEmployee(long employeeId) {
-        return repo.findByEmployeeId(employeeId);
+    public List<VendorEngagement> getAll() {
+        return store;
     }
 
     @Override
     public void delete(Long id) {
-        repo.deleteById(id);
+        store.removeIf(e -> e.getId().equals(id));
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vendor-engagements")
+@RequestMapping("/api/engagements")
 public class VendorEngagementController {
 
     private final VendorEngagementService service;
@@ -29,13 +29,6 @@ public class VendorEngagementController {
     @GetMapping
     public List<VendorEngagement> getAll() {
         return service.getAll();
-    }
-
-    @PutMapping("/{id}")
-    public VendorEngagement update(
-            @PathVariable Long id,
-            @RequestBody VendorEngagement engagement) {
-        return service.update(id, engagement);
     }
 
     @DeleteMapping("/{id}")
