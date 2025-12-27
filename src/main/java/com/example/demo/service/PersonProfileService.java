@@ -1,17 +1,17 @@
 package com.example.demo.service;
 
 import com.example.demo.model.PersonProfile;
-import java.util.List;
+import java.util.*;
 
 public interface PersonProfileService {
 
-    PersonProfile create(PersonProfile person);
+    PersonProfile createPerson(PersonProfile p);
 
-    PersonProfile getById(Long id);
+    PersonProfile getPersonById(Long id);
 
-    List<PersonProfile> getAll();
+    List<PersonProfile> getAllPersons();
+
+    Optional<PersonProfile> findByReferenceId(String referenceId);
 
     PersonProfile updateRelationshipDeclared(Long id, boolean declared);
-
-    PersonProfile getByReferenceId(String referenceId);
 }

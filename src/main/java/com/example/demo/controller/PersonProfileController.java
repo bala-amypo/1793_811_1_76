@@ -2,43 +2,23 @@ package com.example.demo.controller;
 
 import com.example.demo.model.PersonProfile;
 import com.example.demo.service.PersonProfileService;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/persons")
-@Tag(name = "Person Profile")
 public class PersonProfileController {
 
-    @Autowired
-    private PersonProfileService service;
+    private final PersonProfileService service;
 
-    @PostMapping
-    public PersonProfile create(@RequestBody PersonProfile person) {
-        return service.create(person);
+    public PersonProfileController(PersonProfileService service) {
+        this.service = service;
     }
 
-    @GetMapping("/{id}")
-    public PersonProfile getById(@PathVariable Long id) {
-        return service.getById(id);
+    public ResponseEntity<PersonProfile> create(PersonProfile p) {
+        return ResponseEntity.ok(service.createPerson(p));
     }
 
-    @GetMapping
-    public List<PersonProfile> getAll() {
-        return service.getAll();
-    }
-
-    @PutMapping("/{id}/relationship-declared")
-    public PersonProfile updateDeclared(@PathVariable Long id,
-                                        @RequestParam boolean declared) {
-        return service.updateRelationshipDeclared(id, declared);
-    }
-
-    @GetMapping("/lookup/{referenceId}")
-    public PersonProfile getByReference(@PathVariable String referenceId) {
-        return service.getByReferenceId(referenceId);
+    public ResponseEntity<PersonProfile> lookup(String ref) {
+        return service.findByReferenceId(ref)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

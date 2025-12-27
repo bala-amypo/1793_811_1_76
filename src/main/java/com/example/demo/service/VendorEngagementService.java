@@ -1,15 +1,15 @@
 package com.example.demo.service;
 
-import com.example.demo.model.VendorEngagement;
-import java.util.List;
+import com.example.demo.model.VendorEngagementRecord;
+import java.util.*;
 
 public interface VendorEngagementService {
 
-    VendorEngagement create(VendorEngagement engagement);
+    VendorEngagementRecord addEngagement(VendorEngagementRecord record);
 
-    VendorEngagement getById(Long id);
+    List<VendorEngagementRecord> getEngagementsByEmployee(Long employeeId);
 
-    List<VendorEngagement> getAll();
+    List<VendorEngagementRecord> getEngagementsByVendor(Long vendorId);
 
-    void delete(Long id);
+    List<VendorEngagementRecord> getAllEngagements();
 }

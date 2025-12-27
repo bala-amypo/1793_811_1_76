@@ -9,4 +9,16 @@ public class JwtTokenProvider {
         this.secret = secret;
         this.expiry = expiry;
     }
+
+    public String generateToken(UserPrincipal p) {
+        return p.getUsername() + ".token";
+    }
+
+    public boolean validateToken(String token) {
+        return token != null && token.contains(".");
+    }
+
+    public String getUsernameFromToken(String token) {
+        return token.split("\\.")[0];
+    }
 }
