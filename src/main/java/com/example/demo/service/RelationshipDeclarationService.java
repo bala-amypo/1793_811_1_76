@@ -10,4 +10,7 @@ public interface RelationshipDeclarationService {
     List<RelationshipDeclaration> getByPerson(Long personId);
 
     RelationshipDeclaration verify(Long id, String status);
+
+    // 🔥 ADD THIS
+    List<RelationshipDeclaration> getAll();
 }
