@@ -1,11 +1,11 @@
 package com.example.demo.model;
 
-public class VendorEngagement {
+public class VendorEngagementRecord {
 
     private Long id;
     private Long vendorId;
-    private Long employeeId;
-    private String engagementType;
+    private Long engagementId;
+    private String status;
 
     public Long getId() {
         return id;
@@ -23,19 +23,19 @@ public class VendorEngagement {
         this.vendorId = vendorId;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Long getEngagementId() {
+        return engagementId;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setEngagementId(Long engagementId) {
+        this.engagementId = engagementId;
     }
 
-    public String getEngagementType() {
-        return engagementType;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEngagementType(String engagementType) {
-        this.engagementType = engagementType;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
