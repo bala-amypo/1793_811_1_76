@@ -6,7 +6,12 @@ import java.util.List;
 public interface VendorEngagementService {
 
     VendorEngagement create(VendorEngagement engagement);
-    List<VendorEngagement> getByEmployee(Long employeeId);
-    List<VendorEngagement> getByVendor(Long vendorId);
+
+    VendorEngagement getById(Long id);
+
     List<VendorEngagement> getAll();
+
+    VendorEngagement update(Long id, VendorEngagement engagement);
+
+    void delete(Long id);
 }
