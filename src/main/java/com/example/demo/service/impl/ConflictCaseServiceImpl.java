@@ -13,6 +13,23 @@ public class ConflictCaseServiceImpl implements ConflictCaseService {
     public ConflictCaseServiceImpl(ConflictCaseRepository repo) {
     }
 
-    public ConflictCase createCase(ConflictCase c) { return c; }
-    public List<ConflictCase> getAllCases() { return List.of(); }
+    public ConflictCase create(ConflictCase conflictCase) {
+        return conflictCase;
+    }
+
+    public ConflictCase updateStatus(Long id, String status) {
+        return null;
+    }
+
+    public List<ConflictCase> getByPerson(Long personId) {
+        return List.of();
+    }
+
+    public ConflictCase getById(Long id) {
+        return null;
+    }
+
+    public List<ConflictCase> getAll() {
+        return List.of();
+    }
 }

@@ -4,8 +4,10 @@ import com.example.demo.model.PersonProfile;
 import java.util.List;
 
 public interface PersonProfileService {
-    PersonProfile createPerson(PersonProfile p);
-    List<PersonProfile> getAllPersons();
-    PersonProfile getPersonById(long id);
-    PersonProfile findByReferenceId(String refId);
+
+    PersonProfile create(PersonProfile person);
+    PersonProfile getById(Long id);
+    List<PersonProfile> getAll();
+    PersonProfile updateRelationshipDeclared(Long id, boolean declared);
+    PersonProfile getByReferenceId(String refId);
 }

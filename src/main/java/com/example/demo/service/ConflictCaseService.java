@@ -4,6 +4,10 @@ import com.example.demo.model.ConflictCase;
 import java.util.List;
 
 public interface ConflictCaseService {
-    ConflictCase createCase(ConflictCase c);
-    List<ConflictCase> getAllCases();
+
+    ConflictCase create(ConflictCase conflictCase);
+    ConflictCase updateStatus(Long id, String status);
+    List<ConflictCase> getByPerson(Long personId);
+    ConflictCase getById(Long id);
+    List<ConflictCase> getAll();
 }
