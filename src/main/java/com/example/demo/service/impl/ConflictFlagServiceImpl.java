@@ -34,4 +34,3 @@ public class ConflictFlagServiceImpl implements ConflictFlagService {
         return repository.findAll();
     }
 }
-`
