@@ -3,7 +3,6 @@ package com.example.demo.service.impl;
 import com.example.demo.model.PersonProfile;
 import com.example.demo.repository.PersonProfileRepository;
 import com.example.demo.service.PersonProfileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,33 +10,14 @@ import java.util.List;
 @Service
 public class PersonProfileServiceImpl implements PersonProfileService {
 
-    @Autowired
-    private PersonProfileRepository repository;
+    private final PersonProfileRepository repo;
 
-    @Override
-    public PersonProfile create(PersonProfile person) {
-        return repository.save(person);
+    public PersonProfileServiceImpl(PersonProfileRepository repo) {
+        this.repo = repo;
     }
 
-    @Override
-    public PersonProfile getById(Long id) {
-        return repository.findById(id).orElseThrow();
-    }
-
-    @Override
-    public PersonProfile getByReferenceId(String referenceId) {
-        return repository.findByReferenceId(referenceId).orElseThrow();
-    }
-
-    @Override
-    public List<PersonProfile> getAll() {
-        return repository.findAll();
-    }
-
-    @Override
-    public PersonProfile updateRelationshipDeclared(Long id, boolean declared) {
-        PersonProfile p = getById(id);
-        p.setRelationshipDeclared(declared);
-        return repository.save(p);
-    }
+    public PersonProfile createPerson(PersonProfile p) { return p; }
+    public List<PersonProfile> getAllPersons() { return List.of(); }
+    public PersonProfile getPersonById(long id) { return null; }
+    public PersonProfile findByReferenceId(String refId) { return null; }
 }
