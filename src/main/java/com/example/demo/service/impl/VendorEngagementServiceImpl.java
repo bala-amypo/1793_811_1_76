@@ -1,36 +1,26 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.VendorEngagement;
+import com.example.demo.model.VendorEngagementRecord;
+import com.example.demo.repository.VendorEngagementRecordRepository;
+import com.example.demo.repository.PersonProfileRepository;
 import com.example.demo.service.VendorEngagementService;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class VendorEngagementServiceImpl implements VendorEngagementService {
 
-    @Override
-    public VendorEngagement create(VendorEngagement engagement) {
-        return engagement;
+    private final VendorEngagementRecordRepository repo;
+    private final PersonProfileRepository personRepo;
+
+    public VendorEngagementServiceImpl(
+            VendorEngagementRecordRepository repo,
+            PersonProfileRepository personRepo) {
+        this.repo = repo;
+        this.personRepo = personRepo;
     }
 
     @Override
-    public VendorEngagement getById(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<VendorEngagement> getAll() {
-        return List.of();
-    }
-
-    @Override
-    public VendorEngagement update(Long id, VendorEngagement engagement) {
-        return engagement;
-    }
-
-    @Override
-    public void delete(Long id) {
-        // no-op
+    public List<VendorEngagementRecord> getEngagementsByEmployee(long empId) {
+        return repo.findByEmployeeId(empId);
     }
 }
