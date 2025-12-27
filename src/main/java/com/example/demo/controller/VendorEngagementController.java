@@ -1,13 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.VendorEngagement;
+import com.example.demo.model.VendorEngagementRecord;
 import com.example.demo.service.VendorEngagementService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/engagements")
+@RequestMapping("/vendor-engagements")
 public class VendorEngagementController {
 
     private final VendorEngagementService service;
@@ -17,17 +17,17 @@ public class VendorEngagementController {
     }
 
     @PostMapping
-    public VendorEngagement create(@RequestBody VendorEngagement engagement) {
-        return service.create(engagement);
+    public VendorEngagementRecord create(@RequestBody VendorEngagementRecord record) {
+        return service.create(record);
     }
 
     @GetMapping("/{id}")
-    public VendorEngagement getById(@PathVariable Long id) {
+    public VendorEngagementRecord getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
     @GetMapping
-    public List<VendorEngagement> getAll() {
+    public List<VendorEngagementRecord> getAll() {
         return service.getAll();
     }
 
