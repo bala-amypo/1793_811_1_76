@@ -11,6 +11,6 @@ public interface RelationshipDeclarationService {
 
     RelationshipDeclaration verify(Long id, String status);
 
-
+    
     List<RelationshipDeclaration> getAll();
 }
