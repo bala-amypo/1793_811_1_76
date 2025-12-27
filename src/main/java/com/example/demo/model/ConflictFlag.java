@@ -2,31 +2,16 @@ package com.example.demo.model;
 
 public class ConflictFlag {
 
-    private Long id;
-    private Long conflictCaseId;
-    private String reason;
+    private Long caseId;
+    private String flagType;
+    private String severity;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getCaseId() { return caseId; }
+    public void setCaseId(Long caseId) { this.caseId = caseId; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getFlagType() { return flagType; }
+    public void setFlagType(String flagType) { this.flagType = flagType; }
 
-    public Long getConflictCaseId() {
-        return conflictCaseId;
-    }
-
-    public void setConflictCaseId(Long conflictCaseId) {
-        this.conflictCaseId = conflictCaseId;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
+    public String getSeverity() { return severity; }
+    public void setSeverity(String severity) { this.severity = severity; }
 }

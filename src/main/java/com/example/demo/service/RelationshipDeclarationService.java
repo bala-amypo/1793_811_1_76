@@ -5,12 +5,9 @@ import java.util.List;
 
 public interface RelationshipDeclarationService {
 
-    RelationshipDeclaration declare(RelationshipDeclaration declaration);
+    RelationshipDeclaration declareRelationship(RelationshipDeclaration d);
 
-    List<RelationshipDeclaration> getByPerson(Long personId);
+    RelationshipDeclaration verifyDeclaration(long id, boolean verified);
 
-    RelationshipDeclaration verify(Long id, String status);
-
-    
-    List<RelationshipDeclaration> getAll();
+    List<RelationshipDeclaration> getAllDeclarations();
 }

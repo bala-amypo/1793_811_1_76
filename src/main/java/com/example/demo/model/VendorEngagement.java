@@ -5,7 +5,6 @@ public class VendorEngagementRecord {
     private Long id;
     private Long employeeId;
     private String vendorName;
-    private String role;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -15,7 +14,4 @@ public class VendorEngagementRecord {
 
     public String getVendorName() { return vendorName; }
     public void setVendorName(String vendorName) { this.vendorName = vendorName; }
-
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
 }
