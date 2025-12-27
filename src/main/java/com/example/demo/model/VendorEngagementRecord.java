@@ -1,14 +1,17 @@
 package com.example.demo.model;
 
-public class VendorEngagement {
+import jakarta.persistence.*;
 
+@Entity
+public class VendorEngagementRecord {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long vendorId;
-    private Long employeeId;
-    private String engagementType;
 
-    public VendorEngagement() {
-    }
+    private Long employeeId;
+    private String vendorName;
+    private String role;
 
     public Long getId() {
         return id;
@@ -16,14 +19,6 @@ public class VendorEngagement {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getVendorId() {
-        return vendorId;
-    }
-
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
     }
 
     public Long getEmployeeId() {
@@ -34,11 +29,19 @@ public class VendorEngagement {
         this.employeeId = employeeId;
     }
 
-    public String getEngagementType() {
-        return engagementType;
+    public String getVendorName() {
+        return vendorName;
     }
 
-    public void setEngagementType(String engagementType) {
-        this.engagementType = engagementType;
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
