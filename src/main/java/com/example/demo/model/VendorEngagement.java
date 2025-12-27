@@ -1,20 +1,18 @@
- package com.example.demo.model;
+package com.example.demo.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class VendorEngagement {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long personId;
-    private Long vendorId;
-    private String role;
+
+    private String vendorName;
+    private String engagementType;
 
     public VendorEngagement() {
-    }
-
-    public VendorEngagement(Long id, Long personId, Long vendorId, String role) {
-        this.id = id;
-        this.personId = personId;
-        this.vendorId = vendorId;
-        this.role = role;
     }
 
     public Long getId() {
@@ -25,27 +23,19 @@ public class VendorEngagement {
         this.id = id;
     }
 
-    public Long getPersonId() {
-        return personId;
+    public String getVendorName() {
+        return vendorName;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 
-    public Long getVendorId() {
-        return vendorId;
+    public String getEngagementType() {
+        return engagementType;
     }
 
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setEngagementType(String engagementType) {
+        this.engagementType = engagementType;
     }
 }
