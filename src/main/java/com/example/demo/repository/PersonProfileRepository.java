@@ -1,9 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.PersonProfile;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.model.*;
+import java.util.*;
 
-public interface PersonProfileRepository extends JpaRepository<PersonProfile, Long> {
-    PersonProfile findByEmail(String email);
-    PersonProfile findByReferenceId(String referenceId);
+public interface PersonProfileRepository {
+    Optional<PersonProfile> findById(Long id);
+    Optional<PersonProfile> findByEmail(String email);
+    Optional<PersonProfile> findByReferenceId(String ref);
+    List<PersonProfile> findAll();
+    PersonProfile save(PersonProfile p);
 }

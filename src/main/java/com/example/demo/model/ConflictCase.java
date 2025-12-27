@@ -1,12 +1,19 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class ConflictCase {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
     private Long primaryPersonId;
     private Long secondaryPersonId;
     private String triggerSource;
     private String status;
+    private String riskLevel;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -28,4 +35,7 @@ public class ConflictCase {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public String getRiskLevel() { return riskLevel; }
+    public void setRiskLevel(String riskLevel) { this.riskLevel = riskLevel; }
 }

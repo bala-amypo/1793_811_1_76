@@ -1,11 +1,18 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class RelationshipDeclaration {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
     private Long personId;
     private String relatedPersonName;
-    private boolean isVerified;
+    private String relationshipType;
+    private Boolean isVerified = false;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -18,6 +25,11 @@ public class RelationshipDeclaration {
         this.relatedPersonName = relatedPersonName;
     }
 
-    public boolean getIsVerified() { return isVerified; }
-    public void setIsVerified(boolean verified) { isVerified = verified; }
+    public String getRelationshipType() { return relationshipType; }
+    public void setRelationshipType(String relationshipType) {
+        this.relationshipType = relationshipType;
+    }
+
+    public Boolean getIsVerified() { return isVerified; }
+    public void setIsVerified(Boolean verified) { isVerified = verified; }
 }

@@ -1,48 +1,49 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ApiException;
 import com.example.demo.model.PersonProfile;
 import com.example.demo.repository.PersonProfileRepository;
 import com.example.demo.service.PersonProfileService;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
-@Service
 public class PersonProfileServiceImpl implements PersonProfileService {
 
-    private final PersonProfileRepository repository;
+    private final PersonProfileRepository repo;
 
-    public PersonProfileServiceImpl(PersonProfileRepository repository) {
-        this.repository = repository;
+    public PersonProfileServiceImpl(PersonProfileRepository repo) {
+        this.repo = repo;
     }
 
-    @Override
-    public PersonProfile create(PersonProfile person) {
-        return repository.save(person);
+    public PersonProfile createPerson(PersonProfile p) {
+        if (p.getEmail() == null)
+            throw new ApiException("Email required");
+
+        if (repo.findByEmail(p.getEmail()).isPresent())
+            throw new ApiException("Duplicate email");
+
+        if (repo.findByReferenceId(p.getReferenceId()).isPresent())
+            throw new ApiException("Duplicate reference");
+
+        return repo.save(p);
     }
 
-    @Override
-    public PersonProfile getById(Long id) {
-        return repository.findById(id).orElse(null);
+    public PersonProfile getPersonById(Long id) {
+        return repo.findById(id)
+                .orElseThrow(() -> new ApiException("Person not found"));
     }
 
-    @Override
-    public List<PersonProfile> getAll() {
-        return repository.findAll();
+    public List<PersonProfile> getAllPersons() {
+        return repo.findAll();
     }
 
-    @Override
-    public PersonProfile updateRelationshipDeclared(Long id, boolean declared) {
-        PersonProfile person = repository.findById(id).orElse(null);
-        if (person != null) {
-            person.setRelationshipDeclared(declared);
-            return repository.save(person);
-        }
-        return null;
+    public Optional<PersonProfile> findByReferenceId(String ref) {
+        return repo.findByReferenceId(ref);
     }
 
-    @Override
-    public PersonProfile getByReferenceId(String referenceId) {
-        return repository.findByReferenceId(referenceId);
+    public PersonProfile updateRelationshipDeclared(Long id, boolean flag) {
+        PersonProfile p = getPersonById(id);
+        p.setRelationshipDeclared(flag);
+        return repo.save(p);
     }
 }
