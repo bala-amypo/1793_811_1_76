@@ -1,37 +1,39 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.PersonProfile;
+import com.example.demo.repository.PersonProfileRepository;
 import com.example.demo.service.PersonProfileService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PersonProfileServiceImpl implements PersonProfileService {
 
-    @Override
-    public PersonProfile create(PersonProfile person) {
-        return person;
+    private final PersonProfileRepository personProfileRepository;
+
+    // ✅ REQUIRED constructor (tests use this)
+    public PersonProfileServiceImpl(PersonProfileRepository personProfileRepository) {
+        this.personProfileRepository = personProfileRepository;
     }
 
     @Override
-    public PersonProfile getById(Long id) {
-        return null;
+    public PersonProfile createPerson(PersonProfile person) {
+        return personProfileRepository.save(person);
     }
 
     @Override
-    public List<PersonProfile> getAll() {
-        return new ArrayList<>();
+    public PersonProfile getPersonById(long id) {
+        return personProfileRepository.findById(id).orElse(null);
     }
 
     @Override
-    public PersonProfile updateRelationshipDeclared(Long id, boolean declared) {
-        return null;
+    public PersonProfile findByReferenceId(String referenceId) {
+        return personProfileRepository.findByReferenceId(referenceId).orElse(null);
     }
 
     @Override
-    public PersonProfile getByReferenceId(String referenceId) {
-        return null;
+    public List<PersonProfile> getAllPersons() {
+        return personProfileRepository.findAll();
     }
 }

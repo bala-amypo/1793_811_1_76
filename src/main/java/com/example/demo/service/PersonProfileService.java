@@ -5,13 +5,11 @@ import java.util.List;
 
 public interface PersonProfileService {
 
-    PersonProfile create(PersonProfile person);
+    PersonProfile createPerson(PersonProfile person);
 
-    PersonProfile getById(Long id);
+    PersonProfile getPersonById(long id);
 
-    List<PersonProfile> getAll();
+    PersonProfile findByReferenceId(String referenceId);
 
-    PersonProfile updateRelationshipDeclared(Long id, boolean declared);
-
-    PersonProfile getByReferenceId(String referenceId);
+    List<PersonProfile> getAllPersons();
 }
