@@ -20,7 +20,17 @@ public class VendorEngagementServiceImpl implements VendorEngagementService {
     }
 
     @Override
-    public List<VendorEngagementRecord> getEngagementsByEmployee(long empId) {
-        return repo.findByEmployeeId(empId);
+    public VendorEngagementRecord save(VendorEngagementRecord record) {
+        return repo.save(record);
+    }
+
+    @Override
+    public List<VendorEngagementRecord> getEngagementsByEmployee(long employeeId) {
+        return repo.findByEmployeeId(employeeId);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repo.deleteById(id);
     }
 }
