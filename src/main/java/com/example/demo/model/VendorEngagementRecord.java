@@ -2,8 +2,7 @@ package com.example.demo.model;
 
 public record VendorEngagementRecord(
         Long id,
-        Long personId,
+        Long employeeId,
         String vendorName,
-        String engagementType
-) {
-}
+        String role
+) {}
