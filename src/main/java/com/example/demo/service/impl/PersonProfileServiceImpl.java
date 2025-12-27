@@ -10,30 +10,39 @@ import java.util.List;
 @Service
 public class PersonProfileServiceImpl implements PersonProfileService {
 
-    private final PersonProfileRepository personProfileRepository;
+    private final PersonProfileRepository repository;
 
-    // ✅ REQUIRED constructor (tests use this)
-    public PersonProfileServiceImpl(PersonProfileRepository personProfileRepository) {
-        this.personProfileRepository = personProfileRepository;
+    public PersonProfileServiceImpl(PersonProfileRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public PersonProfile createPerson(PersonProfile person) {
-        return personProfileRepository.save(person);
+    public PersonProfile create(PersonProfile person) {
+        return repository.save(person);
     }
 
     @Override
-    public PersonProfile getPersonById(long id) {
-        return personProfileRepository.findById(id).orElse(null);
+    public PersonProfile getById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public PersonProfile findByReferenceId(String referenceId) {
-        return personProfileRepository.findByReferenceId(referenceId).orElse(null);
+    public List<PersonProfile> getAll() {
+        return repository.findAll();
     }
 
     @Override
-    public List<PersonProfile> getAllPersons() {
-        return personProfileRepository.findAll();
+    public PersonProfile updateRelationshipDeclared(Long id, boolean declared) {
+        PersonProfile person = repository.findById(id).orElse(null);
+        if (person != null) {
+            person.setRelationshipDeclared(declared);
+            return repository.save(person);
+        }
+        return null;
+    }
+
+    @Override
+    public PersonProfile getByReferenceId(String referenceId) {
+        return repository.findByReferenceId(referenceId);
     }
 }
