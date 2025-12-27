@@ -37,4 +37,10 @@ public class RelationshipDeclarationServiceImpl implements RelationshipDeclarati
         }
         return null;
     }
+
+    // 🔥 ADD THIS
+    @Override
+    public List<RelationshipDeclaration> getAll() {
+        return store;
+    }
 }
