@@ -5,7 +5,8 @@ import com.example.demo.model.PersonProfile;
 import com.example.demo.repository.PersonProfileRepository;
 import com.example.demo.service.PersonProfileService;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public class PersonProfileServiceImpl implements PersonProfileService {
 
@@ -15,35 +16,44 @@ public class PersonProfileServiceImpl implements PersonProfileService {
         this.repo = repo;
     }
 
+    @Override
     public PersonProfile createPerson(PersonProfile p) {
-        if (p.getEmail() == null)
-            throw new ApiException("Email required");
 
-        if (repo.findByEmail(p.getEmail()).isPresent())
+        if (p.getEmail() == null || p.getEmail().isEmpty()) {
+            throw new ApiException("Email is required");
+        }
+
+        if (repo.findByEmail(p.getEmail()).isPresent()) {
             throw new ApiException("Duplicate email");
+        }
 
-        if (repo.findByReferenceId(p.getReferenceId()).isPresent())
+        if (repo.findByReferenceId(p.getReferenceId()).isPresent()) {
             throw new ApiException("Duplicate reference");
+        }
 
         return repo.save(p);
     }
 
+    @Override
     public PersonProfile getPersonById(Long id) {
         return repo.findById(id)
                 .orElseThrow(() -> new ApiException("Person not found"));
     }
 
+    @Override
     public List<PersonProfile> getAllPersons() {
         return repo.findAll();
     }
 
-    public Optional<PersonProfile> findByReferenceId(String ref) {
-        return repo.findByReferenceId(ref);
+    @Override
+    public Optional<PersonProfile> findByReferenceId(String referenceId) {
+        return repo.findByReferenceId(referenceId);
     }
 
-    public PersonProfile updateRelationshipDeclared(Long id, boolean flag) {
+    @Override
+    public PersonProfile updateRelationshipDeclared(Long id, boolean value) {
         PersonProfile p = getPersonById(id);
-        p.setRelationshipDeclared(flag);
+        p.setRelationshipDeclared(value);
         return repo.save(p);
     }
 }

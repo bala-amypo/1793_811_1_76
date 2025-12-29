@@ -1,30 +1,47 @@
 package com.example.demo.service.impl;
 
-import java.util.*;
-import org.springframework.stereotype.Service;
+import com.example.demo.exception.ApiException;
+import com.example.demo.model.PersonProfile;
 import com.example.demo.model.RelationshipDeclaration;
+import com.example.demo.repository.PersonProfileRepository;
+import com.example.demo.repository.RelationshipDeclarationRepository;
 import com.example.demo.service.RelationshipDeclarationService;
 
-@Service
+import java.util.List;
+
 public class RelationshipDeclarationServiceImpl implements RelationshipDeclarationService {
 
-    @Override
-    public RelationshipDeclaration declare(RelationshipDeclaration declaration) {
-        return declaration;
+    private final RelationshipDeclarationRepository repo;
+    private final PersonProfileRepository personRepo;
+
+    public RelationshipDeclarationServiceImpl(RelationshipDeclarationRepository repo,
+                                              PersonProfileRepository personRepo) {
+        this.repo = repo;
+        this.personRepo = personRepo;
     }
 
     @Override
-    public List<RelationshipDeclaration> getByPerson(Long personId) {
-        return new ArrayList<>();
+    public RelationshipDeclaration declareRelationship(RelationshipDeclaration d) {
+
+        PersonProfile p = personRepo.findById(d.getPersonId())
+                .orElseThrow(() -> new ApiException("Person not found"));
+
+        p.setRelationshipDeclared(true);
+        personRepo.save(p);
+
+        return repo.save(d);
     }
 
     @Override
-    public RelationshipDeclaration verify(Long id, String status) {
-        return new RelationshipDeclaration();
+    public RelationshipDeclaration verifyDeclaration(Long id, boolean verified) {
+        RelationshipDeclaration d = repo.findById(id)
+                .orElseThrow(() -> new ApiException("Declaration not found"));
+        d.setIsVerified(verified);
+        return repo.save(d);
     }
 
     @Override
-    public List<RelationshipDeclaration> getAll() {
-        return new ArrayList<>();
+    public List<RelationshipDeclaration> getAllDeclarations() {
+        return repo.findAll();
     }
 }
