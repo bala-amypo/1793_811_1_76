@@ -1,13 +1,13 @@
 package com.example.demo.model;
 
-public class VendorEngagementRecord {
+public class VendorEngagement {
 
     private Long id;
     private Long employeeId;
     private Long vendorId;
     private String role;
 
-    public VendorEngagementRecord() {
+    public VendorEngagement() {
     }
 
     public Long getId() {
