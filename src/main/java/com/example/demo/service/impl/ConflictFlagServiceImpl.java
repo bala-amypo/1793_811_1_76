@@ -1,30 +1,15 @@
-package com.example.demo.service.impl;
+package com.example.demo.service;
 
-import java.util.*;
-import org.springframework.stereotype.Service;
+import java.util.List;
 import com.example.demo.model.ConflictFlag;
-import com.example.demo.service.ConflictFlagService;
 
-@Service
-public class ConflictFlagServiceImpl implements ConflictFlagService {
+public interface ConflictFlagService {
 
-    @Override
-    public ConflictFlag create(ConflictFlag flag) {
-        return flag;
-    }
+    ConflictFlag create(ConflictFlag flag);
 
-    @Override
-    public List<ConflictFlag> getByCase(Long caseId) {
-        return new ArrayList<>();
-    }
+    List<ConflictFlag> getByCase(Long caseId);
 
-    @Override
-    public ConflictFlag getById(Long id) {
-        return new ConflictFlag();
-    }
+    ConflictFlag getById(Long id);
 
-    @Override
-    public List<ConflictFlag> getAll() {
-        return new ArrayList<>();
-    }
+    List<ConflictFlag> getAll();
 }
