@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.VendorEngagementRecord;
+import com.example.demo.model.VendorEngagement;
 import com.example.demo.service.VendorEngagementService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,17 +17,17 @@ public class VendorEngagementController {
     }
 
     @PostMapping
-    public VendorEngagementRecord create(@RequestBody VendorEngagementRecord engagement) {
+    public VendorEngagement create(@RequestBody VendorEngagement engagement) {
         return service.create(engagement);
     }
 
     @GetMapping("/{id}")
-    public VendorEngagementRecord getById(@PathVariable Long id) {
+    public VendorEngagement getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
     @GetMapping
-    public List<VendorEngagementRecord> getAll() {
+    public List<VendorEngagement> getAll() {
         return service.getAll();
     }
 
