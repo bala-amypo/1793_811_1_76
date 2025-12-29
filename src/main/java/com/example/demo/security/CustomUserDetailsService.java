@@ -1,20 +1,45 @@
 package com.example.demo.security;
 
+import com.example.demo.exception.ApiException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class CustomUserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
+    // In-memory store (used only for tests)
     private final Map<String, UserPrincipal> users = new HashMap<>();
-    private final AtomicLong seq = new AtomicLong(1);
+    private final AtomicLong idGen = new AtomicLong(1);
 
-    public UserPrincipal register(String email, String pass, String role) {
-        UserPrincipal u = new UserPrincipal(seq.getAndIncrement(), email, role);
-        users.put(email, u);
-        return u;
+    // Used in test21, test22, test53
+    public UserPrincipal register(String username, String password, String role) {
+
+        if (users.containsKey(username)) {
+            throw new ApiException("User already exists");
+        }
+
+        UserPrincipal user = new UserPrincipal(
+                idGen.getAndIncrement(),
+                username,
+                password,
+                role
+        );
+
+        users.put(username, user);
+        return user;
     }
 
-    public Object loadUserByUsername(String email) {
-        return users.get(email);
+    @Override
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+
+        UserPrincipal user = users.get(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
 }

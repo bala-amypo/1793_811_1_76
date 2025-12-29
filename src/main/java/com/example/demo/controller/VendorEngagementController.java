@@ -1,13 +1,14 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.VendorEngagement;
+import com.example.demo.model.VendorEngagementRecord;
 import com.example.demo.service.VendorEngagementService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/vendor-engagements")
+@RequestMapping("/engagements")
 public class VendorEngagementController {
 
     private final VendorEngagementService service;
@@ -17,22 +18,25 @@ public class VendorEngagementController {
     }
 
     @PostMapping
-    public VendorEngagement create(@RequestBody VendorEngagement engagement) {
-        return service.create(engagement);
+    public ResponseEntity<VendorEngagementRecord> add(
+            @RequestBody VendorEngagementRecord r) {
+        return ResponseEntity.ok(service.addEngagement(r));
     }
 
-    @GetMapping("/{id}")
-    public VendorEngagement getById(@PathVariable Long id) {
-        return service.getById(id);
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<List<VendorEngagementRecord>> byEmployee(
+            @PathVariable Long id) {
+        return ResponseEntity.ok(service.getEngagementsByEmployee(id));
+    }
+
+    @GetMapping("/vendor/{id}")
+    public ResponseEntity<List<VendorEngagementRecord>> byVendor(
+            @PathVariable Long id) {
+        return ResponseEntity.ok(service.getEngagementsByVendor(id));
     }
 
     @GetMapping
-    public List<VendorEngagement> getAll() {
-        return service.getAll();
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public ResponseEntity<List<VendorEngagementRecord>> listAll() {
+        return ResponseEntity.ok(service.getAllEngagements());
     }
 }

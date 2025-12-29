@@ -2,38 +2,36 @@ package com.example.demo.controller;
 
 import com.example.demo.model.RelationshipDeclaration;
 import com.example.demo.service.RelationshipDeclarationService;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/relationships")
-@Tag(name = "Relationship Declaration")
+@RequestMapping("/relationships")
 public class RelationshipDeclarationController {
 
-    @Autowired
-    private RelationshipDeclarationService service;
+    private final RelationshipDeclarationService service;
 
-    @PostMapping
-    public RelationshipDeclaration declare(@RequestBody RelationshipDeclaration d) {
-        return service.declare(d);
+    public RelationshipDeclarationController(RelationshipDeclarationService service) {
+        this.service = service;
     }
 
-    @GetMapping("/person/{personId}")
-    public List<RelationshipDeclaration> getByPerson(@PathVariable Long personId) {
-        return service.getByPerson(personId);
+    @PostMapping
+    public ResponseEntity<RelationshipDeclaration> declare(
+            @RequestBody RelationshipDeclaration d) {
+        return ResponseEntity.ok(service.declareRelationship(d));
     }
 
     @PutMapping("/{id}/verify")
-    public RelationshipDeclaration verify(@PathVariable Long id,
-                                          @RequestParam String status) {
-        return service.verify(id, status);
+    public ResponseEntity<RelationshipDeclaration> verify(
+            @PathVariable Long id,
+            @RequestParam boolean verified) {
+        return ResponseEntity.ok(service.verifyDeclaration(id, verified));
     }
 
     @GetMapping
-    public List<RelationshipDeclaration> getAll() {
-        return service.getAll();
+    public ResponseEntity<List<RelationshipDeclaration>> listAll() {
+        return ResponseEntity.ok(service.getAllDeclarations());
     }
 }

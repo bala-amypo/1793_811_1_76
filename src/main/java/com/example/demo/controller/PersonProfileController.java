@@ -2,8 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.model.PersonProfile;
 import com.example.demo.service.PersonProfileService;
-import org.springframework.http.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/persons")
 public class PersonProfileController {
 
     private final PersonProfileService service;
@@ -12,13 +17,18 @@ public class PersonProfileController {
         this.service = service;
     }
 
-    public ResponseEntity<PersonProfile> create(PersonProfile p) {
-        return ResponseEntity.ok(service.createPerson(p));
+    // Used in test36
+    @PostMapping
+    public ResponseEntity<PersonProfile> create(@RequestBody PersonProfile p) {
+        PersonProfile saved = service.createPerson(p);
+        return ResponseEntity.ok(saved);
     }
 
-    public ResponseEntity<PersonProfile> lookup(String ref) {
-        return service.findByReferenceId(ref)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    // Used in test57
+    @GetMapping("/lookup/{referenceId}")
+    public ResponseEntity<PersonProfile> lookup(@PathVariable String referenceId) {
+        Optional<PersonProfile> opt = service.findByReferenceId(referenceId);
+        return opt.map(ResponseEntity::ok)
+                  .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

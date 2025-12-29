@@ -1,19 +1,14 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.VendorEngagement;
-import org.springframework.stereotype.Repository;
+import com.example.demo.model.VendorEngagementRecord;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-@Repository
-public interface VendorEngagementRepository {
+public interface VendorEngagementRecordRepository
+        extends JpaRepository<VendorEngagementRecord, Long> {
 
-    VendorEngagement save(VendorEngagement engagement);
+    List<VendorEngagementRecord> findByEmployeeId(Long employeeId);
 
-    Optional<VendorEngagement> findById(Long id);
-
-    List<VendorEngagement> findAll();
-
-    void deleteById(Long id);
+    List<VendorEngagementRecord> findByVendorId(Long vendorId);
 }
