@@ -1,32 +1,50 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.ConflictFlag;
+import com.example.demo.exception.ApiException;
+import com.example.demo.model.*;
+import com.example.demo.repository.*;
 import com.example.demo.service.ConflictFlagService;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-@Service
 public class ConflictFlagServiceImpl implements ConflictFlagService {
 
-    @Override
-    public ConflictFlag create(ConflictFlag flag) {
-        return flag;
+    private final ConflictFlagRepository repo;
+    private final ConflictCaseRepository caseRepo;
+
+    public ConflictFlagServiceImpl(
+            ConflictFlagRepository repo,
+            ConflictCaseRepository caseRepo) {
+        this.repo = repo;
+        this.caseRepo = caseRepo;
     }
 
     @Override
-    public List<ConflictFlag> getByCase(Long caseId) {
-        return new ArrayList<>();
+    public ConflictFlag addFlag(ConflictFlag f) {
+
+        ConflictCase c = caseRepo.findById(f.getCaseId())
+                .orElseThrow(() -> new ApiException("ConflictCase not found"));
+
+        if ("HIGH".equalsIgnoreCase(f.getSeverity()))
+            c.setRiskLevel("HIGH");
+
+        caseRepo.save(c);
+        return repo.save(f);
     }
 
     @Override
-    public ConflictFlag getById(Long id) {
-        return null;
+    public ConflictFlag getFlagById(Long id) {
+        return repo.findById(id)
+                .orElseThrow(() -> new ApiException("Flag not found"));
     }
 
     @Override
-    public List<ConflictFlag> getAll() {
-        return new ArrayList<>();
+    public List<ConflictFlag> getFlagsByCase(Long caseId) {
+        return repo.findByCaseId(caseId);
+    }
+
+    @Override
+    public List<ConflictFlag> getAllFlags() {
+        return repo.findAll();
     }
 }
