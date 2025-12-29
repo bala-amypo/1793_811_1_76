@@ -17,7 +17,7 @@ public class VendorEngagementController {
     }
 
     @PostMapping
-    public VendorEngagement create(@RequestBody VendorEngagement engagement) {
+    public VendorEngagement create(@RequestBody VendorEngagementRecord engagement) {
         return service.create(engagement);
     }
 
