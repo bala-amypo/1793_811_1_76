@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.VendorEngagement;
+import com.example.demo.model.VendorEngagementRecord;
 import com.example.demo.repository.VendorEngagementRepository;
 import com.example.demo.service.VendorEngagementService;
 import org.springframework.stereotype.Service;
@@ -17,17 +17,17 @@ public class VendorEngagementServiceImpl implements VendorEngagementService {
     }
 
     @Override
-    public VendorEngagement create(VendorEngagement engagement) {
+    public VendorEngagementRecord create(VendorEngagementRecord engagement) {
         return repository.save(engagement);
     }
 
     @Override
-    public VendorEngagement getById(Long id) {
+    public VendorEngagementRecord getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<VendorEngagement> getAll() {
+    public List<VendorEngagementRecord> getAll() {
         return repository.findAll();
     }
 
