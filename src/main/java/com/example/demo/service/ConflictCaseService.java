@@ -1,17 +1,17 @@
 package com.example.demo.service;
 
+import java.util.List;
 import com.example.demo.model.ConflictCase;
-import java.util.*;
 
 public interface ConflictCaseService {
 
-    ConflictCase create(ConflictCase c);
+    ConflictCase create(ConflictCase conflictCase);
 
     ConflictCase updateStatus(Long id, String status);
 
+    List<ConflictCase> getByPerson(Long personId);
+
+    ConflictCase getById(Long id);
+
     List<ConflictCase> getAll();
-
-    List<ConflictCase> getCasesByPerson(Long personId);
-
-    Optional<ConflictCase> getCaseById(Long id);
 }

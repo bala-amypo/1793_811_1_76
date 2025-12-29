@@ -1,11 +1,9 @@
 package com.example.demo.service.impl;
 
+import java.util.*;
+import org.springframework.stereotype.Service;
 import com.example.demo.model.ConflictCase;
 import com.example.demo.service.ConflictCaseService;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class ConflictCaseServiceImpl implements ConflictCaseService {
@@ -17,7 +15,7 @@ public class ConflictCaseServiceImpl implements ConflictCaseService {
 
     @Override
     public ConflictCase updateStatus(Long id, String status) {
-        return null;
+        return new ConflictCase();
     }
 
     @Override
@@ -27,7 +25,7 @@ public class ConflictCaseServiceImpl implements ConflictCaseService {
 
     @Override
     public ConflictCase getById(Long id) {
-        return null;
+        return new ConflictCase();
     }
 
     @Override

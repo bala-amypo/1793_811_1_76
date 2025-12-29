@@ -1,11 +1,9 @@
 package com.example.demo.service.impl;
 
+import java.util.*;
+import org.springframework.stereotype.Service;
 import com.example.demo.model.RelationshipDeclaration;
 import com.example.demo.service.RelationshipDeclarationService;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class RelationshipDeclarationServiceImpl implements RelationshipDeclarationService {
@@ -21,8 +19,8 @@ public class RelationshipDeclarationServiceImpl implements RelationshipDeclarati
     }
 
     @Override
-    public RelationshipDeclaration verify(Long declarationId, String status) {
-        return null;
+    public RelationshipDeclaration verify(Long id, String status) {
+        return new RelationshipDeclaration();
     }
 
     @Override
