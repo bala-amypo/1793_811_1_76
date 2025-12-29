@@ -5,11 +5,11 @@ import java.util.*;
 
 public interface ConflictCaseService {
 
-    ConflictCase createCase(ConflictCase c);
+    ConflictCase create(ConflictCase c);
 
-    ConflictCase updateCaseStatus(Long id, String status);
+    ConflictCase updateStatus(Long id, String status);
 
-    List<ConflictCase> getAllCases();
+    List<ConflictCase> getAll();
 
     List<ConflictCase> getCasesByPerson(Long personId);
 
