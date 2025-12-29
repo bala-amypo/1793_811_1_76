@@ -3,40 +3,75 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "person_profile")
 public class PersonProfile {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String email;
     private String referenceId;
+    private String personType;   // EMPLOYEE, VENDOR, APPLICANT
     private String fullName;
-    private String personType; // EMPLOYEE, VENDOR, APPLICANT
     private String department;
 
     private Boolean relationshipDeclared = false;
 
-    // getters & setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // ---------- getters & setters ----------
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getReferenceId() { return referenceId; }
-    public void setReferenceId(String referenceId) { this.referenceId = referenceId; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
+    public String getEmail() {
+        return email;
+    }
 
-    public String getPersonType() { return personType; }
-    public void setPersonType(String personType) { this.personType = personType; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getDepartment() { return department; }
-    public void setDepartment(String department) { this.department = department; }
+    public String getReferenceId() {
+        return referenceId;
+    }
 
-    public Boolean getRelationshipDeclared() { return relationshipDeclared; }
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
+    }
+
+    public String getPersonType() {
+        return personType;
+    }
+
+    public void setPersonType(String personType) {
+        this.personType = personType;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public Boolean getRelationshipDeclared() {
+        return relationshipDeclared;
+    }
+
     public void setRelationshipDeclared(Boolean relationshipDeclared) {
         this.relationshipDeclared = relationshipDeclared;
     }
